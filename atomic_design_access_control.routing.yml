@@ -1,0 +1,9 @@
+atomic_design_access_control.settings:
+  path: '/admin/config/atomic_design_access_control'
+  defaults:
+    _form: '\Drupal\atomic_design_access_control\Form\AtomicDesignAccessControlSettingsForm'
+    _title: 'Atomic design access settings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

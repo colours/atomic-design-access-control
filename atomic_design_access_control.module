@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Contains atomic_design_access_control.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements hook_help().
+ */
+function atomic_design_access_control_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the customization module.
+    case 'help.page.atomic_design_access_control':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Atomic design access control module') . '</p>';
+      return $output;
+
+    default:
+      return '';
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function atomic_design_access_control_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  // Get node types of forbidden nodes.
+  $custom_global_config = \Drupal::config('atomic_design_access_control.settings');
+  $disallowed = $custom_global_config->get('disallow_access');
+  // Node type of the node access check.
+  $type = $node->bundle();
+  // Node object from menu route.
+  $_node = \Drupal::routeMatch()->getParameter('node');
+
+  // If node types are the same (full mode view)
+  if (!empty($_node) && is_object($_node) && $_node->getType() == $type) {
+    if ($op == 'view' && is_string($type) && isset($disallowed) && in_array($type, $disallowed) && $node->in_preview == NULL) {
+      return AccessResult::forbidden();
+    }
+  }
+}

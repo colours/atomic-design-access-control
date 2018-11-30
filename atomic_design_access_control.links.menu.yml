@@ -1,0 +1,6 @@
+atomic_design_access_control.settings:
+  title: 'Atomic design access settings'
+  route_name: atomic_design_access_control.settings
+  description: 'Control which content types can be accessible via URL by anonymous user'
+  parent: system.admin_config_system
+  weight: 40

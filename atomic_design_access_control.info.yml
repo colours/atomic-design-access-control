@@ -1,0 +1,5 @@
+name: Atomic design access control
+type: module
+description: Check which content types is possible to access via direct url for anonymous user
+core: 8.x
+package: Colours
