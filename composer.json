@@ -1,0 +1,8 @@
+{
+    "name": "colours/atomic-design-access-control",
+    "keywords": ["Drupal"],
+    "description": "Drupal 8 module to check which content types is possible to access via direct url for anonymous user",
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "require": {}
+}
